@@ -5,4 +5,4 @@ windows:
   - name: nvim-dotfiles-personal
     layout: main-vertical
     commands:
-      - ~/sw/assets/dotfiles-edit.sh personal
+      - ~/tools/assets/executable_dotfiles-edit.sh personal

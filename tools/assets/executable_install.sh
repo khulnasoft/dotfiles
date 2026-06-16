@@ -60,7 +60,7 @@ fi
 
 echo "Setting up .gitconfig_local"
 # ask the user to input email address
-email=$(gum input --placeholder "Please enter your CodeRabbit email address")
+email=$(gum input --placeholder "Please enter your KhulnaSoft email address")
 
 # ask the user to input their name
 name=$(gum input --placeholder "Please enter your name")
@@ -74,12 +74,12 @@ echo "[user]" >"$HOME"/.gitconfig_local
 echo "  name = $name" >>"$HOME"/.gitconfig_local
 echo "  email = $email" >>"$HOME"/.gitconfig_local
 
-chezmoi init git@github.com:coderabbitai/dotfiles.git
+chezmoi init git@github.com:khulnasoft/dotfiles.git
 chezmoi apply -v
 
 # run autoupdate script
-echo "Running autoupdate script..."
-~/sw/bin/autoupdate.zsh --force
+	echo "Running autoupdate script..."
+	~/tools/bin/executable_autoupdate.zsh --force
 # if autoupdate failed, exit
 if [ $? -ne 0 ]; then
 	echo "Failed to run autoupdate script"

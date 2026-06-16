@@ -99,7 +99,7 @@ if [ ${last_system} -gt ${system_seconds} ] || [ $force_update -eq 1 ]; then
   if command -v revolver >/dev/null 2>&1; then
     revolver_stop
   fi
-	~/sw/bin/sync_brews.sh
+	tools/bin/executable_sync_brews.sh
 	update_error sync_brews $?
 
   revolver --style 'dots2' start 'Updating zinit... (Press q or Enter if this is taking too long)'
@@ -129,8 +129,8 @@ if [ ${last_system} -gt ${system_seconds} ] || [ $force_update -eq 1 ]; then
 
   revolver_stop
 
-  $HOME/sw/bin/sync_coderabbitai.sh
-  $HOME/sw/bin/sync_fluxninja.sh
+  tools/bin/executable_sync_khulnasoft.sh
+  tools/bin/executable_sync_fluxninja.sh
 
   if [[ $TERM == *"tmux"* || $TERM == *"screen"* || -n $TMUX ]]; then
     tmux source-file $HOME/.tmux.conf

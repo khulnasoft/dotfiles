@@ -61,14 +61,14 @@ function set_terminal {
 			# test whether ~/.iterm2_profile_check_v2 doesn't exist
 			if [[ ! -e "${HOME}/.iterm2_profile_check_v2" ]]; then
         rm -f "${HOME}/.iterm2_profile_check"
-        if gum confirm "Do you want to use CodeRabbit's bundled iTerm2 colors/font profile?"; then
+        if gum confirm "Do you want to use KhulnaSoft's bundled iTerm2 colors/font profile?"; then
 					# install iterm2 profile
-					cp ~/sw/assets/iterm2_gruvbox.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/
+					cp ~/tools/assets/iterm2_gruvbox.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/
 					# execute the script
-					pip3 install iterm2 && python3 ~/sw/assets/iterm2_default.py && touch "${HOME}/.iterm2_profile_check_v2" || (echo; echo; echo "Failed to install iTerm2 profile. You might need to enable Python API within iTerm2 preferences (under Magic tab). Press Enter to continue." && read)
+					pip3 install iterm2 && python3 ~/tools/assets/executable_iterm2_default.py && touch "${HOME}/.iterm2_profile_check_v2" || (echo; echo; echo "Failed to install iTerm2 profile. You might need to enable Python API within iTerm2 preferences (under Magic tab). Press Enter to continue." && read)
           # ask about wallpaper
           if gum confirm "Do you want to use matching wallpaper?"; then
-  					# set the wallpaper to ~/sw/assets/apple_gruvbox.heic
+  					# set the wallpaper to ~/tools/assets/apple_gruvbox.heic
 	  				osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"$HOME/sw/assets/apple_gruvbox.heic\""
           fi
         else
@@ -143,12 +143,12 @@ if ! command -v brew &> /dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   # source ~/.zprofile to update PATH
   source ~/.zprofile
-  ~/sw/bin/autoupdate.zsh --force
+  tools/bin/executable_autoupdate.zsh --force
 fi
 
-figlet -w 80 CodeRabbit Zsh && echo "" 2&>/dev/null
+figlet -w 80 KhulnaSoft Zsh && echo "" 2&>/dev/null
 
-source ~/sw/assets/utils.zsh
+source tools/bin/executable_utils.zsh
 
 # See https://unix.stackexchange.com/q/150649/126543
 function expand-command-aliases() {
@@ -208,7 +208,7 @@ func zshexit() {
 rm /tmp/gh_$$ &>/dev/null
 # remove watch on home directory
 watchman watch-del $HOME >/dev/null 
-figlet -w 80 CodeRabbit zsh
+figlet -w 80 KhulnaSoft zsh
 cowsay -d "zsh exiting... see you later..."
 sleep 0.5
 }
@@ -250,13 +250,13 @@ if [[ $OSTYPE == 'darwin'* ]]; then
   fi
 fi
 
-periodic() { silent_background timeout 2 $HOME/sw/bin/gh_checks_status.sh > /tmp/gh_$$ }
+periodic() { silent_background timeout 2 $HOME/tools/bin/executable_gh_checks_status.sh > /tmp/gh_$$ }
 PERIOD=10
 
 function @yazpt_segment_nl() {
 # check whether $last_yazpt_vcs is not equal to $yazpt_state[vcs]
 #if [[ "$last_yazpt_vcs" != "$yazpt_state[vcs]" ]]; then
-#  spinner -q -s "timeout 2 $HOME/sw/bin/gh_checks_status.sh > /tmp/gh_$$"
+#  spinner -q -s "timeout 2 $HOME/tools/bin/executable_gh_checks_status.sh > /tmp/gh_$$"
 #fi
 last_yazpt_vcs="$yazpt_state[vcs]"
 yazpt_state[nl]=""
@@ -501,7 +501,7 @@ zvm_after_init() {
   zstyle ':fzf-tab:complete:(cd|eza|ls|fd|find|cp|mv|rm):argument-rest' popup-pad 50 50
 
   # use lessfilter to preview content files, directories etc.
-  zstyle ':fzf-tab:complete:(cat|bat|vim|nvim|vimr|nvim-qt):argument-rest' fzf-preview 'LESSOPEN="|~/sw/assets/lessfilter %s" less ${(Q)realpath}'
+  zstyle ':fzf-tab:complete:(cat|bat|vim|nvim|vimr|nvim-qt):argument-rest' fzf-preview 'LESSOPEN="|~/tools/assets/executable_lessfilter %s" less ${(Q)realpath}'
   zstyle ':fzf-tab:complete:(cat|bat|vim|nvim|vimr|nvim-qt):argument-rest' fzf-flags --preview-window=right:70%:wrap
   zstyle ':fzf-tab:complete:(cat|bat|vim|nvim|vimr|nvim-qt):argument-rest' popup-pad 50 50
 
@@ -617,7 +617,7 @@ if $AUTO_CLEAR_CACHES; then
     sudo rm -rf $HOME/go
     echo "Go installation cleared."
     echo "Sync FluxNinja repos..."
-    $HOME/sw/bin/sync_fluxninja.sh
+    $HOME/tools/bin/executable_sync_fluxninja.sh
   fi
   if gum confirm "Do you want to prune docker builder cache?"; then
     echo "Pruning docker builder cache..."
@@ -646,17 +646,17 @@ fi
 if $ASCII_WELCOME_ENABLED; then
   # print a random cowsay using fortune using only *.cow files located at $(brew --prefix)/share/cows
   fortune | cowsay -f $(find $(brew --prefix)/share/cowsay/cows/ -name "*.cow" | shuf -n 1)
-  (timeout 2 WTTR_PARAMS="1" ~/sw/bin/wttr.sh ;\
+  (timeout 2 WTTR_PARAMS="1" ~/tools/bin/executable_wttr.sh ;\
     echo; echo -e "${CYAN_BRIGHT}  ==================================  GitHub Status ================================== ${RESET}"; echo;
-    timeout 2 gh status --org coderabbitai) 2&>/dev/null
+    timeout 2 gh status --org khulnasoft) 2&>/dev/null
 fi
 
 unset ASCII_WELCOME_ENABLED
 unset ASCII_WELCOME_SNOOZE
 unset CNF_TF_ENABLED
 
-# run $HOME/sw/bin/autoupdate.zsh by eval it's content
-eval "$(cat $HOME/sw/bin/autoupdate.zsh)"
+# run ~/tools/bin/executable_autoupdate.zsh by eval its content
+eval "$(cat ~/tools/bin/executable_autoupdate.zsh)"
 
 source $HOME/.aliases
 

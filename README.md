@@ -1,28 +1,28 @@
-# CodeRabbit Dotfiles
+# KhulnaSoft Dotfiles
 
-![CodeRabbit Neovim](./sw/assets/vim.png)
+![KhulnaSoft Neovim](./tools/assets/vim.png)
 
 ## Introduction
 
-Welcome to CodeRabbit optimized development environment that is well integrated
+Welcome to KhulnaSoft optimized development environment that is well integrated
 with our stack.
 
 ## Setup
 
-We use [chezmoi](https://www.chezmoi.io) to manage CodeRabbit dotfiles in your
+We use [chezmoi](https://www.chezmoi.io) to manage KhulnaSoft dotfiles in your
 home directory.
 
 ### Automatic Setup
 
 ```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/coderabbitai/dotfiles/master/sw/assets/executable_install.sh)"
+curl -fsSL https://raw.githubusercontent.com/khulnasoft/dotfiles/master/install | bash
 ```
 
 ### Manual Setup
 
 ```
 cd $HOME
-chezmoi init git@github.com:coderabbitai/dotfiles.git
+chezmoi init git@github.com:khulnasoft/dotfiles.git
 # show diff of changes that will be made
 chezmoi diff
 # If you are happy with the changes, apply away!
@@ -43,8 +43,8 @@ Provide username and email address by creating `.gitconfig_local` e.g.
 
 ```
 [user]
-  name = Harjot Gill
-  email = harjot@coderabbit.ai
+  name = Md Sulaiman
+  email = admin@khulnasoft.com
 [github]
    user = <github user name>
    token = <personal access token>
@@ -58,12 +58,12 @@ for GitHub to use HTTP API. Also, it's useful to add this token to your
 
 ### GitHub org cloning script
 
-To clone CodeRabbit, run: `gh_clone_all.sh coderabbitai $HOME/work`. This step
+To clone KhulnaSoft, run: `tools/bin/executable_gh_clone_all.sh khulnasoft $HOME/work`. This step
 is performed automatically on installation.
 
 ### Git pull all repos script
 
-To update all repos in a directory, run: `pull_all.sh $HOME/work/coderabbitai`.
+To update all repos in a directory, run: `tools/bin/executable_pull_all.sh $HOME/work/khulnasoft`.
 This step is performed automatically on auto-updates.
 
 ## Preparing your terminal
@@ -77,10 +77,64 @@ This step is performed automatically on auto-updates.
 Homebrew is the default package manager for this environment. You can provide
 private packages by adding them to: `$HOME/.brew_local`
 
+## CI/CD Validation
+
+This repository includes comprehensive CI/CD validation to ensure code quality and prevent configuration errors:
+
+### GitHub Actions Workflow
+
+The repository includes a `.github/workflows/lint.yml` file that performs:
+
+- **Shellcheck**: Validates all shell scripts for syntax errors and best practices
+- **Vim/Neovim Syntax Check**: Validates Vim and Neovim configuration files
+- **JSON Validation**: Validates all JSON configuration files
+- **YAML Validation**: Validates all YAML configuration files
+- **Git Config Validation**: Validates Git configuration files
+- **Custom Validation**: Runs custom validation scripts
+
+### Validation Script
+
+The repository includes `tools/bin/executable_validate.sh` which performs:
+
+- Comprehensive validation of all configuration files
+- Shell script syntax checking
+- JSON/YAML validation
+- Editor configuration validation
+- Git config validation
+- Executable script validation
+
+### Running Validation Locally
+
+You can run validation locally using:
+
+```bash
+# Run the validation script
+tools/bin/executable_validate.sh
+
+# Or use the GitHub Actions workflow
+# The workflow will run automatically on push, pull requests, and scheduled intervals
+```
+
+### Validation Results
+
+The validation pipeline provides:
+
+- **Error Detection**: Catches configuration errors early
+- **Warning Identification**: Highlights potential issues
+- **Automated Reporting**: Generates detailed validation reports
+- **CI/CD Integration**: Seamless integration with GitHub Actions
+
+### Benefits
+
+- **Improved Code Quality**: Ensures all configurations are valid
+- **Early Error Detection**: Catches issues before they reach production
+- **Better Maintainability**: Standardized validation processes
+- **Enhanced Security**: Validates configuration security
+
 ## Autoupdates
 
 This environment is set to autoupdate every 7 days by default. You can trigger
-autoupdates manually by calling `autoupdate.zsh --force` You can provide custom
+autoupdates manually by calling `tools/bin/executable_autoupdate.zsh --force` You can provide custom
 autoupdate commands by adding them to: `$HOME/.autoupdate_local.zsh`
 
 ## zshrc
@@ -88,7 +142,7 @@ autoupdate commands by adding them to: `$HOME/.autoupdate_local.zsh`
 You can provide additional zshrc settings by adding them to:
 `$HOME/.zshrc_local`
 
-![zsh](./sw/assets/zsh.png)
+![zsh](./tools/assets/zsh.png)
 
 ### Features
 
@@ -107,8 +161,8 @@ You can provide additional zshrc settings by adding them to:
 
 ## tmux
 
-![tmux Menu](./sw/assets/tmux-menu.png)
-![tmux Fuzzy Menu](./sw/assets/tmux-fzf.png)
+![tmux Menu](./tools/assets/tmux-menu.png)
+![tmux Fuzzy Menu](./tools/assets/tmux-fzf.png)
 
 `tmux` sessions are automatically started as part of `.zshrc` execution. You
 will be shown an option to join an existing detached session if they exist,
@@ -136,9 +190,9 @@ otherwise a new session will be created and attached to.
 This environment is highly tuned towards providing a modern neovim/vim setup for
 development using modern languages such as Golang, Typescript etc.
 
-![Fuzzy Menu](./sw/assets/fuzzymenu.png)
+![Fuzzy Menu](./tools/assets/fuzzymenu.png)
 
-![IDE](./sw/assets/vim_ide.png)
+![IDE](./tools/assets/vim_ide.png)
 
 ### vimrc
 
@@ -187,7 +241,7 @@ themes for terminal interface are spread across multiple settings.
   - Linux: Colors will be set automatically using terminal escape codes unless
     `SET_TERMINAL_COLORS` is set to `false` in your `.zshrc_local`.
     Alternatively, you can install default color profile using
-    `$HOME/sw/assets/install_gruvbox.sh`. Make sure to set `SET_TERMINAL_COLORS`
+    `$HOME/tools/assets/executable_install_gruvbox.sh`. Make sure to set `SET_TERMINAL_COLORS`
     to `false` in your `.zshrc_local` if you would like to use terminal's color
     profiles.
 - tmux theme - See `.tmux.conf.settings` for example configuration and override

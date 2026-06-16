@@ -652,9 +652,9 @@ let g:startify_lists = [
       \ { 'type': function('s:gitModified'),  'header': ['   󰊢 Git Modified']},
       \ ]
 
-let figlet_message = 'CodeRabbit Neovim'
+let figlet_message = 'KhulnaSoft Neovim'
 if !has('nvim')
-  let figlet_message = 'CodeRabbit Vim'
+  let figlet_message = 'KhulnaSoft Vim'
 endif
 
 let g:startify_custom_header =

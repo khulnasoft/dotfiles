@@ -107,9 +107,9 @@ source $HOME/.local/share/zinit/zinit.git/zinit.zsh
 
 zinit light marzocchi/zsh-notify
 zstyle ':notify:*' check-focus no
-zstyle ':notify:*' error-icon "$HOME/sw/assets/lose.png"
+zstyle ':notify:*' error-icon "$HOME/tools/assets/lose.png"
 zstyle ':notify:*' error-title "wow such #fail"
-zstyle ':notify:*' success-icon "$HOME/sw/assets/win.png"
+zstyle ':notify:*' success-icon "$HOME/tools/assets/win.png"
 zstyle ':notify:*' success-title "very #success. wow"
 # aggressively notify when commands complete as we use a whitelist
 zstyle ':notify:*' command-complete-timeout 1
@@ -122,9 +122,9 @@ if [[ $OSTYPE == 'linux'* ]]; then
   # linux
   zstyle ':notify:*' app-name sh
   zstyle ':notify:*' expire-time 5000
-  zstyle ':notify:*' error-sound "$HOME/sw/assets/lose.ogg"
-  zstyle ':notify:*' success-sound "$HOME/sw/assets/win.ogg"
-fi
+  zstyle ':notify:*' error-sound "$HOME/tools/assets/lose.ogg"
+  zstyle ':notify:*' success-sound "$HOME/tools/assets/win.ogg"
+  fi
 
 if [[ $OSTYPE == 'darwin'* ]]; then
   zstyle ':notify:*' error-sound "Sonumi"
@@ -134,7 +134,7 @@ fi
 APP_ATTN_PATTERNS=(
   'autoupdate.zsh'
   'sync_brews.sh'
-  'sync_coderabbitai.sh'
+  'sync_khulnasoft.sh'
   'sync_fluxninja.sh'
   'brew'
   'git commit'

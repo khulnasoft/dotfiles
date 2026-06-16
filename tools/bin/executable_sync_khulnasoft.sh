@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-gh_clone_all.sh coderabbitai ~/Work
-pull_all.sh ~/Work/coderabbitai
+gh_clone_all.sh khulnasoft ~/Work
+pull_all.sh ~/Work/khulnasoft
 
-# go through all the directories in ~/Work/coderabbitai
+# go through all the directories in ~/Work/khulnasoft
 # look for package.json files in the subdirectories
 # and run pnpm install in those directories
-find ~/Work/coderabbitai -depth 2 -name package.json -exec dirname {} \; | while read dir; do
+find ~/Work/khulnasoft -depth 2 -name package.json -exec dirname {} \; | while read dir; do
   # if the directory contains a pnpm-lock.yaml file use pnpm
   # otherwise look for a yarn.lock file and use yarn
   # otherwise look for a package-lock.json file and use npm
@@ -22,8 +22,8 @@ find ~/Work/coderabbitai -depth 2 -name package.json -exec dirname {} \; | while
   fi
 done
 
-# install husky git hooks in coderabbitai/mono
-if [ -d ~/Work/coderabbitai/mono ]; then
-  echo "Installing husky git hooks in ~/Work/coderabbitai/mono"
-  (cd ~/Work/coderabbitai/mono && husky)
+# install husky git hooks in khulnasoft/mono
+if [ -d ~/Work/khulnasoft/mono ]; then
+  echo "Installing husky git hooks in ~/Work/khulnasoft/mono"
+  (cd ~/Work/khulnasoft/mono && husky)
 fi
